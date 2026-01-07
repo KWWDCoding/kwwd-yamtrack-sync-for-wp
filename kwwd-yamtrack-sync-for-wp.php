@@ -3,7 +3,7 @@
  * Plugin Name: Yamtrack Sync For WordPress
  * Plugin URI:  https://www.kwwd.co.uk/blog/Yamtrack-To-WP
  * Description: Syncs your latest watched media from Yamtrack which you can display in posts, pages or widgets via a shortcode
- * Version: 1.51
+ * Version: 1.52
  * Requires at least: 6.0
  * Requires PHP: 7.4
  * License: GPL-2.0+
@@ -27,6 +27,21 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 );
 // Since you're using GitHub's "Releases" feature to host the ZIPs:
 $myUpdateChecker->getVcsApi()->enableReleaseAssets();
+
+/** PLUGIN ICONS ***/
+$myUpdateChecker->addResultFilter(function($info) {
+    if ($info) {
+        // Use the RAW content URL from GitHub
+        $githubAssets = 'https://raw.githubusercontent.com/KWWDCoding/kwwd-yamtrack-sync-for-wp/main/assets/';
+        
+        $info->icons = array(
+            '1x'      => $githubAssets . 'icon-128x128.png',
+            '2x'      => $githubAssets . 'icon-256x256.png', // Optional
+            'default' => $githubAssets . 'icon-128x128.png',
+        );
+    }
+    return $info;
+});
 
 /* ==========================================================================
    1. PLUGIN SETUP & API REGISTRATION
