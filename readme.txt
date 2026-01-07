@@ -23,6 +23,8 @@ This plugin provides seamless synchronization between Yamtrack and your WordPres
 == Changelog ==
 = 1.54 =
 * [INTERNAL] Fixed formatted in auto-generated changelog
+
+
 = 1.53 =
 * Added readme.txt so that the plugin description makes sense in WordPress admin
 
@@ -32,4 +34,5 @@ This plugin provides seamless synchronization between Yamtrack and your WordPres
 
 = 1.51 =
 * Initial stable release with corrected versioning.
+
 
