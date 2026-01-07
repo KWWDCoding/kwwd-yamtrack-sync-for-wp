@@ -2,7 +2,7 @@
 Contributors: KWWDCoding
 Requires at least: 6.0
 Tested up to: 6.9
-Stable tag: 1.54
+Stable tag: 1.55
 License: GPLv2 or later
 
 == Description ==
@@ -21,9 +21,11 @@ This plugin provides seamless synchronization between Yamtrack and your WordPres
 5. Grab a cup of tea, put your feet and and watch something! When your Yamtrack instance receives a "watched" updated (either through webhook scrobble or by manually adding an entry) your widget will automatically update when the next sync runs.
 
 == Changelog ==
+= 1.55 =
+* Minor updates and improvements
+
 = 1.54 =
 * [INTERNAL] Fixed formatted in auto-generated changelog
-
 
 = 1.53 =
 * Added readme.txt so that the plugin description makes sense in WordPress admin
@@ -34,5 +36,8 @@ This plugin provides seamless synchronization between Yamtrack and your WordPres
 
 = 1.51 =
 * Initial stable release with corrected versioning.
+
+
+
 
 

@@ -3,7 +3,7 @@
  * Plugin Name: Yamtrack Sync For WordPress
  * Plugin URI:  https://www.kwwd.co.uk/blog/Yamtrack-To-WP
  * Description: Syncs your latest watched media from Yamtrack which you can display in posts, pages or widgets via a shortcode
- * Version: 1.54
+ * Version: 1.55
  * Requires at least: 6.0
  * Requires PHP: 7.4
  * License: GPL-2.0+
@@ -284,7 +284,10 @@ add_shortcode('kwwd_show_yamtrack_last_watched', function() {
 
     $title = esc_html($last_watched['title']);
     $type  = !empty($last_watched['type']) ? ucfirst(esc_html($last_watched['type'])) : 'Media';
-    $time  = date('M j, g:i a', strtotime($last_watched['time']));
+    // Server Time
+    //$time  = date('M j, g:i a', strtotime($last_watched['time']));
+    // New WordPress-aware version:
+    $time = wp_date('M j, g:i a', strtotime($last_watched['time']));
     $img   = $last_watched['image'];
     $align = esc_attr($styles['align']);
     $round = esc_attr($styles['round']);
