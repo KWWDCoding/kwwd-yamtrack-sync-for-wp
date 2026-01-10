@@ -269,8 +269,41 @@ add_action('admin_init', function() {
 /********************************************************************
    6. SHORTCODE DISPLAY
   *******************************************************************/
+function kwwd_yamtrack_shortcode() {
+    $unique_id = 'kwwd_yt_' . rand(100, 999);
+    ob_start(); ?>
+    <div id="<?php echo $unique_id; ?>" class="kwwd-yamtrack-display">
+        <span style="font-style:italic; opacity:0.6;">Updating...</span>
+    </div>
 
-add_shortcode('kwwd_show_yamtrack_last_watched', function() {
+    <script>
+    (function() {
+        const ajaxUrl = '<?php echo admin_url('admin-ajax.php'); ?>';
+        // Force a fresh request every single time
+        fetch(ajaxUrl + '?action=get_fresh_yamtrack&v=' + Date.now())
+            .then(res => res.text())
+            .then(html => {
+                if (html.trim().length > 0) {
+                    document.getElementById('<?php echo $unique_id; ?>').innerHTML = html;
+                }
+            })
+            .catch(err => console.error('Yamtrack AJAX Error:', err));
+    })();
+    </script>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('kwwd_show_yamtrack_last_watched', 'kwwd_yamtrack_shortcode');
+
+// The AJAX handler using your CORRECT option names and styles
+add_action('wp_ajax_get_fresh_yamtrack', 'kwwd_ajax_fresh_data');
+add_action('wp_ajax_nopriv_get_fresh_yamtrack', 'kwwd_ajax_fresh_data');
+
+function kwwd_ajax_fresh_data() {
+    // Clear any previous output to prevent "AAAAA" or other leaks
+    if (ob_get_length()) ob_clean();
+
+    // GET THE CORRECT OPTIONS
     $last_watched = get_option('kwwd_yamtrack_last_watched');
     $styles = get_option('kwwd_yamtrack_styles', [
         'align' => 'left',
@@ -280,35 +313,33 @@ add_shortcode('kwwd_show_yamtrack_last_watched', function() {
         'round'      => '4px'
     ]);
 
-    if (!$last_watched) return '';
+    if (!$last_watched) {
+        wp_die(); // Exit silently if no data
+    }
 
+    // APPLY YOUR EXACT LOGIC
     $title = esc_html($last_watched['title']);
     $type  = !empty($last_watched['type']) ? ucfirst(esc_html($last_watched['type'])) : 'Media';
-    // Server Time
-    //$time  = date('M j, g:i a', strtotime($last_watched['time']));
-    // New WordPress-aware version:
-    $time = wp_date('M j, g:i a', strtotime($last_watched['time']));
+    $time  = wp_date('M j, g:i a', strtotime($last_watched['time']));
     $img   = $last_watched['image'];
     $align = esc_attr($styles['align']);
     $round = esc_attr($styles['round']);
-
     $img_margin = ($align === 'center') ? '0 auto 10px' : ($align === 'right' ? '0 0 10px auto' : '0 0 10px 0');
 
-    $output = '<div class="kwwd-yamtrack-widget" style="line-height:1.4; text-align:' . $align . ';">';
+    // OUTPUT THE HTML
+    echo '<div class="kwwd-yamtrack-widget" style="line-height:1.4; text-align:' . $align . ';">';
     
     if ($img) {
-        // Cache-buster ?v= ensures the image updates even if filename is the same
-        $output .= '<img src="' . esc_url($img) . '?v=' . time() . '" style="max-width:100%; height:auto; display:block; margin:' . $img_margin . '; border-radius:' . $round . ';">';
+        echo '<img src="' . esc_url($img) . '?v=' . time() . '" style="max-width:100%; height:auto; display:block; margin:' . $img_margin . '; border-radius:' . $round . ';">';
     }
 
-    $output .= '<span style="display:block; text-transform:uppercase; font-size:' . esc_attr($styles['label_size']) . '; color:' . esc_attr($styles['label_color']) . ';">Last Watched</span>';
-    $output .= '<strong style="display:block; font-size:' . esc_attr($styles['title_size']) . '; color:' . esc_attr($styles['title_color']) . ';">' . $title . '</strong>';
-    $output .= '<span style="display:block; margin-top:5px; font-size:' . esc_attr($styles['meta_size']) . '; color:' . esc_attr($styles['meta_color']) . ';">' . $type . ' &bull; ' . $time . '</span>';
-    $output .= '</div>';
+    echo '<span style="display:block; text-transform:uppercase; font-size:' . esc_attr($styles['label_size']) . '; color:' . esc_attr($styles['label_color']) . ';">Last Watched</span>';
+    echo '<strong style="display:block; font-size:' . esc_attr($styles['title_size']) . '; color:' . esc_attr($styles['title_color']) . ';">' . $title . '</strong>';
+    echo '<span style="display:block; margin-top:5px; font-size:' . esc_attr($styles['meta_size']) . '; color:' . esc_attr($styles['meta_color']) . ';">' . $type . ' &bull; ' . $time . '</span>';
+    echo '</div>';
 
-    return $output;
-});
-add_filter('widget_text', 'do_shortcode');
+    wp_die(); // Always die in WP AJAX
+}
 
 
 /*******************************************************************

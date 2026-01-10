@@ -20,6 +20,14 @@ This plugin provides seamless synchronization between Yamtrack and your WordPres
 4. Style the display of the Latest watched show/movie as required through the plugin settings.
 5. Grab a cup of tea, put your feet and and watch something! When your Yamtrack instance receives a "watched" updated (either through webhook scrobble or by manually adding an entry) your widget will automatically update when the next sync runs.
 
+== Support & Links ==
+* [Plugin Webpage](https://www.kwwd.co.uk/blog/yamtrack-to-wp)
+* [Support my Work](https://ko-fi.com/kwwdcoding)
+* [Report an Issue](https://github.com/KWWDCoding/kwwd-yamtrack-sync-for-wp/issues)
+
+== Credits ==
+This plugin uses the [Plugin Update Checker](https://github.com/YahnisElsts/plugin-update-checker) library by Yahnis Elsts.
+
 == Changelog ==
 = 1.55 =
 * Minor updates and improvements

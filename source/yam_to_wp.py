@@ -7,7 +7,9 @@ SECRET_KEY = ''
 
 # The full path to the folder containing your Yamtrack db.sqlite3
 # Example: '/home/docker/yamtrack'
-DB_PATH = '/path/to/your/yamtrack/folder' 
+DB_PATH = '/path/to/your/yamtrack/databsefolder' 
+
+# --- CONFIGURATION ENDS ---
 
 # Auto-constructed paths
 YAMDB_LOCATION = os.path.join(DB_PATH, 'db', 'db.sqlite3')
