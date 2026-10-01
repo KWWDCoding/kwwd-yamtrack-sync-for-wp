@@ -2,7 +2,7 @@
 Contributors: KWWDCoding
 Requires at least: 6.0
 Tested up to: 7.1.2
-Stable tag: 1.57
+Stable tag: 1.5.8
 License: GPLv2 or later
 
 == Description ==
@@ -29,7 +29,12 @@ This plugin provides seamless synchronization between Yamtrack and your WordPres
 This plugin uses the [Plugin Update Checker](https://github.com/YahnisElsts/plugin-update-checker) library by Yahnis Elsts.
 
 == Changelog ==
-= 1.57 =
+= 1.5.8 =
+* Minor Bug Fixes:
+** Fixed and issue with extra files being added to plugin update
+** Moved image assets to fit in with new folder structure
+
+= 1.5.7 =
 * Changed layouts so a user can now chose from 3 different styles
 * Added in attributes to the shortcode to allow for default override
 * General bug fixes and code cleanup
