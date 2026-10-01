@@ -2,7 +2,7 @@
 Contributors: KWWDCoding
 Requires at least: 6.0
 Tested up to: 7.1.2
-Stable tag: 1.6.0
+Stable tag: 2.0.0
 License: GPLv2 or later
 
 == Description ==
@@ -29,8 +29,11 @@ This plugin provides seamless synchronization between Yamtrack and your WordPres
 This plugin uses the [Plugin Update Checker](https://github.com/YahnisElsts/plugin-update-checker) library by Yahnis Elsts.
 
 == Changelog ==
+= 2.0.0 =
+* Version bump to ensure updates occur with new version number system
+
 = 1.6.0 =
-* Version bump to ensure updates occurring with new version number system
+* Minor bug fixes
 
 = 1.5.8 =
 * Minor Bug Fixes:
