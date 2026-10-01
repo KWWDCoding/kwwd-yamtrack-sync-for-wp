@@ -1,0 +1,82 @@
+/* ==========================================================================
+   YAMTRACK CARD
+   .kwwd-yamtrack-display is the ONLY card. Both the "Fetching..." message
+   and the final content live inside it, so they share the same styling.
+   ========================================================================== */
+
+.kwwd-yamtrack-display {
+    /* Fallback values. The plugin overrides these with the user's saved
+       settings via wp_add_inline_style(). */
+    --kwwd-label-size: 0.8em;
+    --kwwd-label-color: #666666;
+    --kwwd-title-size: 1.1em;
+    --kwwd-title-color: #000000;
+    --kwwd-meta-size: 0.85em;
+    --kwwd-meta-color: #888888;
+    --kwwd-card-color: #f6f6f6;
+    --kwwd-border-color: #108ba7;
+
+    /* Card look: user colours, fixed border width and corner radius */
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    line-height: 1.4;
+    box-sizing: border-box;
+    background: var(--kwwd-card-color);
+    border-left: 3px solid var(--kwwd-border-color);
+    border-radius: 8px;
+}
+
+/* ---------- Shared parts ---------- */
+
+.kwwd-yt-cover {
+    display: block;
+    height: auto;
+    flex-shrink: 0;          /* image never gets squashed by the text */
+    align-self: flex-start;  /* image sits at the top, not stretched */
+    border-radius: 4px;
+}
+
+
+.kwwd-yt-heading {font-weight: 900;}
+
+.kwwd-yt-text { text-align: left; }
+
+.kwwd-yt-loading {
+    font-style: italic;
+    opacity: 0.6;
+}
+
+.kwwd-yt-label {
+    display: block;
+    text-transform: uppercase;
+    font-size: var(--kwwd-label-size);
+    color: var(--kwwd-label-color);
+}
+
+.kwwd-yt-title {
+    display: block;
+    font-size: var(--kwwd-title-size);
+    color: var(--kwwd-title-color);
+}
+
+.kwwd-yt-meta {
+    display: block;
+    margin-top: 5px;
+    font-size: var(--kwwd-meta-size);
+    color: var(--kwwd-meta-color);
+}
+
+/* ==========================================================================
+   LAYOUTS (class is set by the "Card Layout" setting)
+   ========================================================================== */
+
+/* Compact: small image left, text beside it */
+.kwwd_yamtrack_compact .kwwd-yt-cover { width: 60px;  height: 60px;  object-fit: cover; }
+/* Side: larger image left, text beside it */
+.kwwd_yamtrack_side .kwwd-yt-cover    { width: 120px; height: 120px; object-fit: cover; }
+
+/* Stacked: full-width image on top, centred text underneath */
+.kwwd_yamtrack_stacked { flex-direction: column; }
+.kwwd_yamtrack_stacked .kwwd-yt-cover { width: 100%; align-self: auto; border-radius:10px}
+.kwwd_yamtrack_stacked .kwwd-yt-text { text-align: center; }
